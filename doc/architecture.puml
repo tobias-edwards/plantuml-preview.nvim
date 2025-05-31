@@ -1,0 +1,22 @@
+@startuml
+
+title plantuml-preview high-level architecture
+
+participant "Neovim client" as NeovimClient
+participant "Neovim server" as NeovimServer
+participant "Web server" as WebServer
+participant "Browser" as Browser
+participant "Plantuml" as Plantuml
+
+NeovimClient -> NeovimServer: Execute `:PlantumlPreviewOpen`
+NeovimServer -> WebServer: Start web server
+WebServer -> WebServer: Launch web server
+opt
+  WebServer -> Browser: Open browser
+end
+
+WebServer --> NeovimServer: Web server ready
+NeovimServer -> Plantuml: Generate plantuml image
+Plantuml --> NeovimServer: Generated plantuml image path
+
+@enduml

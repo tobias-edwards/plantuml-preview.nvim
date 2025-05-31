@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      :root {
+        --white: #d9d9d9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        min-height: 100%;
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        width: 100%;
+        background: #f9f9f9;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 16px;
+        height: 100%;
+        width: 100%;
+      }
+
+      #plantuml {
+        background: #f1f1fa;
+        max-width: 100%;
+      }
+
+      dialog {
+        padding: 0;
+        border: none;
+        background: none;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        padding: 16px;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .error-container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        padding: 24px 16px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        border-top: 5px solid rgba(217, 0, 0, 0.8);
+        font-family: sans-serif;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .error-message {
+        display: inline-block;
+        margin: 0;
+        color: var(--white);
+      }
+
+      .close-dialog-button {
+        background: none;
+        cursor: pointer;
+        padding: 4px 8px;
+        border: 1px solid var(--white);
+        color: var(--white);
+        border-radius: 4px;
+        font-weight: bold;
+        outline: none;
+        transition: opacity 0.1s ease-in-out;
+      }
+      .close-dialog-button:hover {
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <dialog>
+      <div class="overlay"></div>
+      <div class="error-container">
+        <p class="error-message">Error: Line 22 has some error asdf</p>
+        <button class="close-dialog-button">x</button>
+      </div>
+    </dialog>
+    <div class="container">
+      <img id="plantuml" src="" alt="" />
+    </div>
+    <script src="https://unpkg.com/@panzoom/panzoom@4.6.0/dist/panzoom.min.js"></script>
+    <script>
+      const wsUri = "ws://localhost:{{PORT}}/";
+      const websocket = new WebSocket(wsUri);
+      const container = document.querySelector(".container");
+      const plantumlImage = document.querySelector("#plantuml");
+      const dialog = document.querySelector("dialog");
+      Panzoom(container);
+
+      document
+        .querySelector(".close-dialog-button")
+        .addEventListener("click", () => {
+          dialog.close();
+        });
+
+      function updateImageSrc(src) {
+        dialog.close();
+        plantumlImage.src = src;
+      }
+
+      function updateError(errorMessage) {
+        document.querySelector(".error-message").textContent = errorMessage;
+        dialog.showModal();
+      }
+
+      websocket.onmessage = (e) => {
+        const { data, error } = JSON.parse(e.data);
+        if (error) {
+          const errorMessage = error.message;
+          updateError(errorMessage);
+          return;
+        }
+        const plantumlImageSrc = data.url;
+        console.log({ plantumlImageSrc });
+        updateImageSrc(
+          `http://localhost:{{PORT}}/image?url=${plantumlImageSrc}`,
+        );
+      };
+
+      websocket.onerror = (e) => {
+        alert(e);
+      };
+    </script>
+  </body>
+</html>

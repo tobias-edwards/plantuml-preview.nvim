@@ -8,7 +8,7 @@
 
 # lazy setup
 {
-    "tobias-edwards/plantuml-preview",
+    "tobias-edwards/plantuml-preview.nvim",
     config = function()
         require("plantuml-preview").setup()
     end,

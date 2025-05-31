@@ -23,6 +23,7 @@
 - [x] Release v0.0.1-beta.0 and tag it
 - [ ] Add `:help` documentation
 - [ ] Add to Luarocks?
+- [ ] Test and fix on Windows. MacOS working only atm
 
 ## Improvements
 

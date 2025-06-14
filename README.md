@@ -1,51 +1,70 @@
 **BETA**
 
-# plantuml-preview
+# plantuml-preview.nvim
 
-```
-# check health
-:health plantuml-preview
+Live preview and share PlantUML files.
 
-# lazy setup
+![plantuml-preview demo](./doc/demo.gif)
+
+## ⚡ Installation
+
+Dependencies:
+
+- [Deno](https://docs.deno.com/runtime/getting_started/installation/)
+- [PlantUML](https://plantuml.com/starting)
+
+Using [lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```lua
 {
     "tobias-edwards/plantuml-preview.nvim",
     config = function()
         require("plantuml-preview").setup()
-    end,
+    end
 }
 ```
 
-## Roadmap
+If installed correctly, plugin health report should be OK:
 
-- [x] Squash all commits to protect from leakage
-- [ ] Add release workflow?
-- [x] Make public
-- [x] Release v0.0.1-beta.0 and tag it
+```sh
+:checkhealth plantuml-preview
+
+# plantuml-preview:
+
+# Checking for dependencies
+# - ✅ OK deno installed.
+# - ✅ OK plantuml installed.
+# - ✅ OK plenary installed.
+```
+
+## 🔧 Configuration
+
+Optional configuration can be passed into the `.setup()` function. Defaults are shown below:
+
+```lua
+require("plantuml-preview").setup({
+    open_browser = true, # Open the browser on :PlantumlPreviewOpen
+    port = 3000, # Live reload server port
+})
+```
+
+## ✨ Features
+
+- `:PlantumlPreviewOpen` - start a live reload server on the PlantUML file
+- `:PlantumlPreviewClose` - stop the live reload server
+- `:PlantumlPreviewShareImage` - generate an image URL of the PlantUML file (copied to clipboard)
+- `:PlantumlPreviewShareUML` - generate a PlantUML Web Editor URL (copied to clipboard)
+- Available offline
+- Pretty error feedback in browser
+- Pan and zoom diagrams in browser
+
+## 🛣️ Roadmap
+
 - [ ] Add `:help` documentation
 - [ ] Add to Luarocks?
 - [ ] Test and fix on Windows. MacOS working only atm
-
-## Improvements
-
 - [ ] Change browser title to filename
 - [ ] Change callback syntax to `(error, callback)`--handle errors! More `pcall`?
 - [ ] Allow to preview multiple plantuml buffers, increment port
 - [ ] Drop Deno and run tcp-server from Lua
-
-# Inspiration
-
-- https://github.com/weirongxu/plantuml-previewer.vim
-  - Good! But
-    - dependencies: https://github.com/tyru/open-browser.vim
-    - written in Vimscript
-- https://github.com/Sol-Ponz/plantuml-previewer.nvim
-  - Preview is within Neovim
-- https://gitlab.com/itaranto/plantuml.nvim
-  - Similar to above, but deprecated in favour of https://github.com/iamcco/markdown-preview.nvim
-
-Why Deno?
-
-- Simple APIs
-- Built-in support for websockets
-- Built-in watcher module
-- Native TS support
+- [ ] Support multiple simultaneous servers

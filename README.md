@@ -58,7 +58,7 @@ require("plantuml-preview").setup({
 - Pretty error feedback in browser
 - Pan and zoom diagrams in browser
 
-## 🛣️ Roadmap
+## ⛰️ Roadmap
 
 - [ ] Add `:help` documentation
 - [ ] Add to Luarocks?

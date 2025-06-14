@@ -43,8 +43,8 @@ Optional configuration can be passed into the `.setup()` function. Defaults are 
 
 ```lua
 require("plantuml-preview").setup({
-    open_browser = true, # Open the browser on :PlantumlPreviewOpen
-    port = 3000, # Live reload server port
+    open_browser = true, -- Open the browser on :PlantumlPreviewOpen
+    port = 3000, -- Live reload server port
 })
 ```
 

@@ -2,7 +2,7 @@
 
 # plantuml-preview.nvim
 
-Live preview and share PlantUML files.
+Live preview and share PlantUML files. Pan diagrams in the browser and receive pretty error feedback - and all available offline!
 
 ![plantuml-preview demo](./doc/demo.gif)
 
@@ -48,15 +48,12 @@ require("plantuml-preview").setup({
 })
 ```
 
-## ✨ Features
+## ✨ Commands
 
 - `:PlantumlPreviewOpen` - start a live reload server on the PlantUML file
 - `:PlantumlPreviewClose` - stop the live reload server
-- `:PlantumlPreviewShareImage` - generate an image URL of the PlantUML file (copied to clipboard)
+- `:PlantumlPreviewShareImage [png|svg|txt]` - generate an image URL of the PlantUML file (copied to clipboard). Default `png`
 - `:PlantumlPreviewShareUML` - generate a PlantUML Web Editor URL (copied to clipboard)
-- Available offline
-- Pretty error feedback in browser
-- Pan and zoom diagrams in browser
 
 ## ⛰️ Roadmap
 

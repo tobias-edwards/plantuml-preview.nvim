@@ -58,9 +58,9 @@ require("plantuml-preview").setup({
 ## ⛰️ Roadmap
 
 - [x] Add `:help` documentation
+- [x] Change browser title to filename
 - [ ] Add to Luarocks?
 - [ ] Test and fix on Windows. MacOS working only atm
-- [ ] Change browser title to filename
 - [ ] Change callback syntax to `(error, callback)`--handle errors! More `pcall`?
 - [ ] Allow to preview multiple plantuml buffers, increment port
 - [ ] Drop Deno and run tcp-server from Lua

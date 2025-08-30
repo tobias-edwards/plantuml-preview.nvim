@@ -14,7 +14,7 @@ const bindHandlers = (ws: WebSocket) => {
   };
 };
 
-export const app = ({ port }: { port: number }) => {
+export const app = ({ port, title }: { port: number; title: string }) => {
   let ws: WebSocket;
 
   Deno.serve({
@@ -59,6 +59,7 @@ export const app = ({ port }: { port: number }) => {
         const data = await Deno.readFile("./index.html");
         let html = decoder.decode(data);
         html = html.replaceAll("{{PORT}}", port.toString());
+        html = html.replaceAll("{{TITLE}}", title.toString());
         return new Response(html, {
           headers: {
             "Content-Type": "text/html",

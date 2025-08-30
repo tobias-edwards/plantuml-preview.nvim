@@ -20,12 +20,16 @@ function M.start(callback)
 	local port = core.config.port
 	local open_browser = core.config.open_browser and "true" or "false"
 
+	local filename = vim.fn.expand("%")
+	local title = vim.fs.basename(filename)
+
 	process = vim.system({
 		"deno",
 		"run",
 		"start",
 		"--port=" .. port,
 		"--open-browser=" .. open_browser,
+		"--title=" .. title,
 	}, {
 		cwd = server_dir,
 		detach = false,

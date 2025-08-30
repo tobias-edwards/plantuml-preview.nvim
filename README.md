@@ -1,5 +1,3 @@
-**BETA**
-
 # plantuml-preview.nvim
 
 Live preview and share PlantUML files. Pan diagrams in the browser and receive pretty error feedback - and all available offline!

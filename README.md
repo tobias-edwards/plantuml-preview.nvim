@@ -37,7 +37,7 @@ If installed correctly, plugin health report should be OK:
 # - ✅ OK plenary installed.
 ```
 
-## 🔧 Configuration
+## 🔧 Setup
 
 Optional configuration can be passed into the `.setup()` function. Defaults are shown below:
 
@@ -57,11 +57,10 @@ require("plantuml-preview").setup({
 
 ## ⛰️ Roadmap
 
-- [ ] Add `:help` documentation
+- [x] Add `:help` documentation
 - [ ] Add to Luarocks?
 - [ ] Test and fix on Windows. MacOS working only atm
 - [ ] Change browser title to filename
 - [ ] Change callback syntax to `(error, callback)`--handle errors! More `pcall`?
 - [ ] Allow to preview multiple plantuml buffers, increment port
 - [ ] Drop Deno and run tcp-server from Lua
-- [ ] Support multiple simultaneous servers
